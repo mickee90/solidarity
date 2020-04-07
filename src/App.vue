@@ -1,8 +1,29 @@
 <template>
   <div id="app">
+    <div
+      v-if="!backdoor"
+      class="absolute bg-gray-100 flex inset-0 items-center justify-center text-4xl z-50"
+    >
+      Under uppbyggnad
+    </div>
     <router-view :key="$route.fullPath" />
   </div>
 </template>
+
+<script>
+export default {
+  data() {
+    return {
+      backdoor: false,
+    };
+  },
+  created() {
+    if ("backdoor" in this.$route.query) {
+      this.backdoor = true;
+    }
+  },
+};
+</script>
 
 <style lang="scss">
 #app {
