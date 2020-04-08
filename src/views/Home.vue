@@ -1,14 +1,20 @@
 <template>
   <div>
-    <div id="nav" class="flex items-center justify-between">
+    <div id="nav" class="flex items-center justify-between mb-10 shadow-md">
       <div class="text-4xl font-bold">
         <a href="/" class="no-underline">Solidariteten</a>
       </div>
       <nav class="nav flex">
+        <router-link :to="{ name: 'NeedHelp' }" class="ml-3"
+          >Vi behöver hjälp med</router-link
+        >
+        <router-link :to="{ name: 'CanHelp' }" class="ml-3"
+          >Vi kan hjälpa till med</router-link
+        >
         <router-link :to="{ name: 'Register' }" class="ml-3"
           >Registrera dig</router-link
         >
-        <router-link :to="{ name: 'AboutUs' }" class="ml-3"
+        <router-link :to="{ name: 'ContactUs' }" class="ml-3"
           >Kontakta oss</router-link
         >
       </nav>
@@ -75,8 +81,10 @@
       >
         <div
           class="h-full object-cover"
-          style="background-image: url(https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1352&amp;q=80)"
+          style="background-image: url(/img/hero-people-sunset.jpg);background-position: center;
+    background-size: cover;"
         >
+          <!-- style="background-image: url(https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=crop&amp;w=1352&amp;q=80)" -->
           <div class="h-full bg-black opacity-25"></div>
         </div>
       </div>
@@ -85,8 +93,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
 export default {
   name: "Home",
   data() {
@@ -100,7 +106,7 @@ export default {
 
       this.$router.push({
         name: "NeedHelp",
-        params: { city: this.chosenCity },
+        // params: { city: this.chosenCity },
       });
     },
   },

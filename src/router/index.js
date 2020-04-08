@@ -3,9 +3,11 @@ import VueRouter from "vue-router";
 
 import Home from "../views/Home.vue";
 import NeedHelp from "../views/NeedHelp.vue";
+import NeedHelpShow from "../views/NeedHelpShow.vue";
 import CanHelp from "../views/CanHelp.vue";
+import CanHelpShow from "../views/CanHelpShow.vue";
 import Register from "../views/Register.vue";
-import AboutUs from "../views/AboutUs.vue";
+import ContactUs from "../views/ContactUs.vue";
 
 Vue.use(VueRouter);
 
@@ -16,24 +18,34 @@ const routes = [
     component: Home,
   },
   {
-    path: "/:city/need-help",
+    path: "/varberg/need-help",
     name: "NeedHelp",
     component: NeedHelp,
   },
   {
-    path: "/:city/can-help",
+    path: "/varberg/need-help-show/1",
+    name: "NeedHelpShow",
+    component: NeedHelpShow,
+  },
+  {
+    path: "/varberg/can-help",
     name: "CanHelp",
     component: CanHelp,
   },
   {
-    path: "/register",
+    path: "/varberg/can-help-show/1",
+    name: "CanHelpShow",
+    component: CanHelpShow,
+  },
+  {
+    path: "/varberg/register",
     name: "Register",
     component: Register,
   },
   {
-    path: "/about-us",
-    name: "AboutUs",
-    component: AboutUs,
+    path: "/varberg/about-us",
+    name: "ContactUs",
+    component: ContactUs,
   },
 ];
 

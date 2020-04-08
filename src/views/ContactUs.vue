@@ -20,7 +20,11 @@
       </nav>
     </div>
     <div class="content">
-      <div class="bg-white m-auto max-w-lg p-16 rounded-md w-full">
+      <div class="bg-white m-auto max-w-lg px-16 pb-16 pt-8 rounded-md w-full">
+        <div class="pb-8">
+          Om ni har några frågor eller förslag på förbättringar får ni gärna
+          höra av er till oss.
+        </div>
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
             <label
@@ -63,60 +67,26 @@
               placeholder="E-post"
               class="appearance-none block w-full bg-gray-200 text-gray-700 mb-3 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
-            <p class="text-gray-600 text-xs italic">
-              E-posten kommer användas som ditt användarnamn och kontaktuppgift
-            </p>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
           <div class="w-full px-3">
             <label
-              for="grid-password"
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              for="grid-password"
             >
-              Lösenord </label
-            ><input
-              id="grid-password"
-              type="password"
-              placeholder="******************"
-              class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-            />
-            <p class="text-gray-600 text-xs italic">
-              Kräver minst sex tecken varav en stor bokstav och en siffra.
-            </p>
+              Meddelande
+            </label>
+            <textarea
+              class=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
+              id="message"
+            ></textarea>
           </div>
         </div>
-        <div class="flex justify-between items-center">
-          <div class="relative">
-            <select
-              v-model="chosenCity"
-              class="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-              id="grid-state"
-            >
-              <option value="">Välj ort</option>
-              <option value="varberg">Varberg</option></select
-            >
-            <div
-              class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
-            >
-              <svg
-                class="fill-current h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path
-                  d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"
-                ></path>
-              </svg>
-            </div>
-          </div>
-          <div class="">
-            <div class="relative">
-              <button class="btn btn-blue" @click="onRegister">
-                Registrera
-              </button>
-            </div>
-          </div>
+        <div class="flex flex-wrap justify-end">
+          <button class="btn btn-blue" @click="onSendForm">
+            Registrera
+          </button>
         </div>
       </div>
     </div>
@@ -125,14 +95,8 @@
 
 <script>
 export default {
-  name: "Home",
-  data() {
-    return {
-      chosenCity: "",
-    };
-  },
   methods: {
-    onRegister() {
+    onSendForm() {
       console.log("yo");
     },
   },
