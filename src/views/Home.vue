@@ -1,25 +1,6 @@
 <template>
   <div>
-    <div id="nav" class="flex items-center justify-between mb-10 shadow-md">
-      <div class="text-4xl font-bold">
-        <a href="/" class="no-underline">Solidariteten</a>
-      </div>
-      <nav class="nav flex">
-        <router-link :to="{ name: 'NeedHelp' }" class="ml-3"
-          >Vi behöver hjälp med</router-link
-        >
-        <router-link :to="{ name: 'CanHelp' }" class="ml-3"
-          >Vi kan hjälpa till med</router-link
-        >
-        <router-link :to="{ name: 'Register' }" class="ml-3"
-          >Registrera dig</router-link
-        >
-        <router-link :to="{ name: 'ContactUs' }" class="ml-3"
-          >Kontakta oss</router-link
-        >
-      </nav>
-    </div>
-    <div class="flex bg-white" style="height:600px;">
+    <div class="flex bg-white max-w-screen-xl mx-auto" style="height:600px;">
       <div
         class="flex items-center lg:text-left lg:w-1/2 md:px-8 px-8 text-center"
       >

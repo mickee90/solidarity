@@ -1,10 +1,29 @@
 <template>
   <div id="app">
     <div
-      v-if="!backdoor"
+      v-if="!$store.getters.getBackdoor"
       class="absolute bg-gray-100 flex inset-0 items-center justify-center text-4xl z-50"
     >
       Under uppbyggnad
+    </div>
+    <div id="nav" class="flex items-center justify-between mb-10 shadow-md">
+      <div class="text-4xl font-bold">
+        <a href="/" class="no-underline">Solidariteten</a>
+      </div>
+      <nav class="nav flex">
+        <router-link :to="{ name: 'NeedHelp' }" class="ml-3"
+          >Vi behöver hjälp med</router-link
+        >
+        <router-link :to="{ name: 'CanHelp' }" class="ml-3"
+          >Vi kan hjälpa till med</router-link
+        >
+        <router-link :to="{ name: 'Register' }" class="ml-3"
+          >Registrera dig</router-link
+        >
+        <router-link :to="{ name: 'ContactUs' }" class="ml-3"
+          >Kontakta oss</router-link
+        >
+      </nav>
     </div>
     <router-view :key="$route.fullPath" />
   </div>
@@ -12,14 +31,9 @@
 
 <script>
 export default {
-  data() {
-    return {
-      backdoor: false,
-    };
-  },
   created() {
     if ("backdoor" in this.$route.query) {
-      this.backdoor = true;
+      this.$store.commit("setBackdoor");
     }
   },
 };

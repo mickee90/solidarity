@@ -1,7 +1,8 @@
 <template>
   <div
-    @click="onGoTo(1)"
-    class="cursor-pointer border border-gray-400 lg:flex lg:max-w-full max-w-sm rounded-lg overflow-hidden w-full"
+    @click="onGoTo"
+    class="border border-gray-400 lg:flex lg:max-w-full max-w-sm rounded-lg overflow-hidden w-full"
+    :class="{ 'cursor-pointer': url !== null }"
   >
     <div
       class="flex flex-none h-48 items-center justify-center lg:h-auto lg:rounded-l lg:rounded-t-none lg:w-48 overflow-hidden rounded-t text-center"
@@ -29,9 +30,18 @@
 
 <script>
 export default {
+  props: {
+    url: {
+      required: false,
+      type: Object,
+      default: null,
+    },
+  },
   methods: {
-    onGoTo(id) {
-      this.$router.push({ name: "NeedHelpShow", params: { postId: id } });
+    onGoTo() {
+      if (this.url === null) return;
+
+      this.$router.push(this.url);
     },
   },
 };

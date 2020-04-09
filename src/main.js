@@ -5,8 +5,10 @@ import router from "./router";
 import store from "./store";
 import apolloProvider from "./apolloProvider";
 import VueTailwind from "vue-tailwind";
+import Vuelidate from "vuelidate";
 
 Vue.use(VueTailwind);
+Vue.use(Vuelidate);
 
 import "./assets/styles/index.css";
 

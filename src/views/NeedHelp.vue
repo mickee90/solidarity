@@ -1,26 +1,7 @@
 <template>
   <div>
-    <div id="nav" class="flex items-center justify-between mb-10 shadow-md">
-      <div class="text-4xl font-bold">
-        <a href="/" class="no-underline">Solidariteten</a>
-      </div>
-      <nav class="nav flex">
-        <router-link :to="{ name: 'NeedHelp' }" class="ml-3"
-          >Vi behöver hjälp med</router-link
-        >
-        <router-link :to="{ name: 'CanHelp' }" class="ml-3"
-          >Vi kan hjälpa till med</router-link
-        >
-        <router-link :to="{ name: 'Register' }" class="ml-3"
-          >Registrera dig</router-link
-        >
-        <router-link :to="{ name: 'ContactUs' }" class="ml-3"
-          >Kontakta oss</router-link
-        >
-      </nav>
-    </div>
-    <div class="content gap-2 grid grid-cols-2 px-8">
-      <Card>
+    <div class="content gap-2 grid grid-cols-2 px-8 xl:grid-cols-3">
+      <Card :url="{ name: 'NeedHelpShow', params: { postId: 1 } }">
         <template slot="logo"></template>
         <template slot="header">Havanna</template>
         <template slot="ingress"
@@ -28,7 +9,7 @@
           rabatterat pris.</template
         >
       </Card>
-      <Card>
+      <Card :url="{ name: 'NeedHelpShow', params: { postId: 2 } }">
         <template slot="logo"></template>
         <template slot="header">Varbergs sjukhus</template>
         <template slot="ingress"
@@ -39,7 +20,7 @@
           resurser
         </template>
       </Card>
-      <Card>
+      <Card :url="{ name: 'NeedHelpShow', params: { postId: 3 } }">
         <template slot="logo"></template>
         <template slot="header">Ann Göransson</template>
         <template slot="ingress"
@@ -47,7 +28,7 @@
           maten två gånger i veckan</template
         >
       </Card>
-      <Card>
+      <Card :url="{ name: 'NeedHelpShow', params: { postId: 4 } }">
         <template slot="logo"></template>
         <template slot="header">Varbergs torg</template>
         <template slot="ingress"
@@ -66,11 +47,6 @@ import Card from "../components/Card.vue";
 export default {
   components: {
     Card,
-  },
-  methods: {
-    onGoTo(id) {
-      this.$router.push({ name: "NeedHelpShow", params: { postId: id } });
-    },
   },
 };
 </script>

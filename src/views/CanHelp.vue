@@ -1,26 +1,7 @@
 <template>
   <div>
-    <div id="nav" class="flex items-center justify-between mb-10 shadow-md">
-      <div class="text-4xl font-bold">
-        <a href="/" class="no-underline">Solidariteten</a>
-      </div>
-      <nav class="nav flex">
-        <router-link :to="{ name: 'NeedHelp' }" class="ml-3"
-          >Vi behöver hjälp med</router-link
-        >
-        <router-link :to="{ name: 'CanHelp' }" class="ml-3"
-          >Vi kan hjälpa till med</router-link
-        >
-        <router-link :to="{ name: 'Register' }" class="ml-3"
-          >Registrera dig</router-link
-        >
-        <router-link :to="{ name: 'ContactUs' }" class="ml-3"
-          >Kontakta oss</router-link
-        >
-      </nav>
-    </div>
-    <div class="content gap-2 grid grid-cols-2 px-8">
-      <Card>
+    <div class="content gap-2 grid grid-cols-2 px-8 xl:grid-cols-3">
+      <Card :url="{ name: 'CanHelpShow', params: { postId: 1 } }">
         <template slot="logo"></template>
         <template slot="header">Svenssons måleri</template>
         <template slot="ingress"
@@ -28,7 +9,7 @@
           leverans av matvaror och liknande</template
         >
       </Card>
-      <Card>
+      <Card :url="{ name: 'CanHelpShow', params: { postId: 2 } }">
         <template slot="logo"></template>
         <template slot="header">Varbergs Kammarkör</template>
         <template slot="ingress"
@@ -37,7 +18,7 @@
           för att minska risken för smitta.
         </template>
       </Card>
-      <Card>
+      <Card :url="{ name: 'CanHelpShow', params: { postId: 3 } }">
         <template slot="logo"></template>
         <template slot="header">Mats Persson</template>
         <template slot="ingress"
@@ -45,7 +26,7 @@
           så bokar vi in en tid.</template
         >
       </Card>
-      <Card>
+      <Card :url="{ name: 'CanHelpShow', params: { postId: 4 } }">
         <template slot="logo"></template>
         <template slot="header">Sara Jönsson</template>
         <template slot="ingress"
