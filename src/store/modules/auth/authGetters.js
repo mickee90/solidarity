@@ -16,5 +16,5 @@ export const getters = {
   },
   refreshToken(state) {
     return state.refreshToken;
-  }
+  },
 };

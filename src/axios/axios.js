@@ -2,7 +2,7 @@ import axios from "axios";
 import router from "../router/index";
 
 const instance = axios.create({
-  baseURL: "https://solidarity-8b275.firebaseapp.com",
+  baseURL: "https://solidarity-8b275.firebaseio.com/",
 });
 
 instance.defaults.headers.get["Accepts"] = "application/json";

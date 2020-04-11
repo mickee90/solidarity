@@ -7,6 +7,8 @@ import NeedHelpShow from "../views/NeedHelpShow.vue";
 import CanHelp from "../views/CanHelp.vue";
 import CanHelpShow from "../views/CanHelpShow.vue";
 import Register from "../views/Register.vue";
+import Profile from "../views/Profile.vue";
+import Login from "../views/Login.vue";
 import ContactUs from "../views/ContactUs.vue";
 
 Vue.use(VueRouter);
@@ -38,12 +40,22 @@ const routes = [
     component: CanHelpShow,
   },
   {
-    path: "/varberg/register",
+    path: "/login",
+    name: "Login",
+    component: Login,
+  },
+  {
+    path: "/register",
     name: "Register",
     component: Register,
   },
   {
-    path: "/varberg/about-us",
+    path: "/profile",
+    name: "Profile",
+    component: Profile,
+  },
+  {
+    path: "/about-us",
     name: "ContactUs",
     component: ContactUs,
   },

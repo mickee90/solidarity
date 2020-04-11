@@ -79,30 +79,29 @@ export const actions = {
   //   return response;
   // },
 
-  // async login({ commit, dispatch }, payload) {
-  //   const response = await axiosAuth
-  //     .post(":signInWithPassword?key=" + process.env.VUE_APP_FIREBASE_API_KEY, {
-  //       email: payload.username,
-  //       password: payload.password,
-  //       returnSecureToken: true,
-  //     })
-  //     .then((res) => res.data)
-  //     .catch((err) => alert(err.message));
+  async login({ commit, dispatch }, payload) {
+    const response = await axiosAuth
+      .post(":signInWithPassword?key=" + process.env.VUE_APP_FIREBASE_API_KEY, {
+        email: payload.username,
+        password: payload.password,
+        returnSecureToken: true,
+      })
+      .then((res) => res.data)
+      .catch((err) => alert(err.message));
 
-  //   if (!response) return false;
+    if (!response) return false;
 
-  //   commit("authUser", {
-  //     idToken: response.idToken,
-  //     userId: response.localId,
-  //     expirationDate: generateExpirationDate(response.expiresIn),
-  //     refreshToken: response.refreshToken,
-  //   });
+    commit("authUser", {
+      idToken: response.idToken,
+      userId: response.localId,
+      expirationDate: generateExpirationDate(response.expiresIn),
+      refreshToken: response.refreshToken,
+    });
 
-  //   dispatch("setLogoutTimer", response.expiresIn);
-  //   dispatch("fetchUser", payload);
-  //   dispatch("fetchTripImages");
-  //   router.replace("/trips");
-  // },
+    dispatch("setLogoutTimer", response.expiresIn);
+    dispatch("fetchUser", payload);
+    router.replace("/");
+  },
 
   // tryAutoLogin({ commit, state }) {
   //   const idToken = state.idToken;
@@ -127,26 +126,27 @@ export const actions = {
   // },
 
   logout({ dispatch }) {
-    dispatch("resetAllStates");
+    dispatch("resetAllStates", null, { root: true });
+
     router.replace("/login");
   },
 
-  // async fetchUser({ commit, state }, payload) {
-  //   if (!state.idToken) {
-  //     return;
-  //   }
+  async fetchUser({ commit, state }, payload) {
+    if (!state.idToken) {
+      return;
+    }
 
-  //   const url = `/profiles.json?auth=${state.idToken}&orderBy="username"&equalTo="${payload.username}"`;
-  //   const response = await axios.get(url).catch((error) => console.log(error));
+    const url = `/profiles.json?auth=${state.idToken}&orderBy="username"&equalTo="${payload.username}"`;
+    const response = await axios.get(url).catch((error) => console.log(error));
 
-  //   if (!response) return;
+    if (!response) return;
 
-  //   const profile = response.data[Object.keys(response.data)[0]];
+    const profile = response.data[Object.keys(response.data)[0]];
 
-  //   if (profile.username) {
-  //     commit("profile/storeProfile", { ...profile }, { root: true });
-  //   }
-  // },
+    if (profile.username) {
+      commit("profile/storeProfile", { ...profile }, { root: true });
+    }
+  },
 
   async storeUser({ commit, state }, payload) {
     if (!state.idToken) {
@@ -160,6 +160,6 @@ export const actions = {
     if (!response) return;
 
     commit("profile/storeProfile", { ...payload }, { root: true });
-    router.replace("/trips");
+    router.replace("/");
   },
 };
