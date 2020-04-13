@@ -4,7 +4,7 @@
       <div class="text-4xl font-bold">
         <a href="/" class="no-underline">Solidariteten</a>
       </div>
-      <nav class="nav flex items-center">
+      <nav class="nav flex items-center text-xl">
         <router-link :to="{ name: 'NeedHelp' }" class="menu-item ml-3">Vi behöver hjälp med</router-link>
         <router-link :to="{ name: 'CanHelp' }" class="menu-item ml-3">Vi kan hjälpa till med</router-link>
         <button href="#" id="menu-btn" @click="showMenu = !showMenu">
@@ -18,7 +18,7 @@
     <nav id="nav-container" :class="{ show: showMenu }">
       <div id="backdrop" @click="showMenu = !showMenu"></div>
       <div class="nav">
-        <ul class="navbar-nav ml-auto text-right">
+        <ul class="navbar-nav ml-auto text-right text-xl">
           <li v-if="isAuth" class="pt-6 px-6">
             <router-link :to="{ name: 'Profile' }" class="menu-item ml-3">Min profil</router-link>
           </li>
@@ -59,8 +59,8 @@ export default {
       return this.$store.getters["auth/isAuthenticated"];
     },
     username() {
-      return this.$store.getters["auth/user"] !== null
-        ? this.$store.getters["auth/user"].username
+      return this.$store.getters["auth/getUser"] !== null
+        ? this.$store.getters["auth/getUser"].username
         : "";
     }
   },

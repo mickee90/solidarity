@@ -2,8 +2,8 @@ import axios from "../../../axios/axios";
 
 export const actions = {
   async storeProfile({ commit, rootGetters }, data) {
-    const idToken = rootGetters.idToken;
-    const userId = rootGetters.userId;
+    const idToken = rootGetters.getIdToken;
+    const userId = rootGetters.getUserId;
 
     if (!idToken || !userId) {
       alert("Hmm, something is missing. Try again!");
@@ -17,32 +17,36 @@ export const actions = {
     if (!response) return;
 
     commit("storeProfile", response);
+
+    return true;
   },
 
-  // async editProfile({ commit, getters, rootGetters }, updatedProfile) {
-  //   const idToken = rootGetters.idToken;
-  //   const userId = rootGetters.userId;
+  async editProfile({ commit, getters, rootGetters }, updatedProfile) {
+    const idToken = rootGetters["auth/getIdToken"];
+    const userId = rootGetters["auth/getUserId"];
 
-  //   if (!idToken || !userId) {
-  //     alert("Hmm, something is missing. Try again!");
-  //     return;
-  //   }
+    if (!idToken || !userId) {
+      alert("Hmm, something is missing. Try again!");
+      return;
+    }
 
-  //   const response = await axios
-  //     .put(`/profiles/${userId}.json?auth=${idToken}`, {
-  //       ...getters.getProfile,
-  //       ...updatedProfile,
-  //     })
-  //     .then((res) => res.data);
+    const response = await axios
+      .put(`/profiles/${userId}.json?auth=${idToken}`, {
+        ...getters.getProfile,
+        ...updatedProfile,
+      })
+      .then((res) => res.data);
 
-  //   if (!response) return;
+    if (!response) return;
 
-  //   commit("storeProfile", response);
-  // },
+    commit("storeProfile", response);
 
-  // editAvatar({ dispatch, getters }, avatar) {
-  //   const profile = { ...getters.getProfile, avatar };
+    return true;
+  },
 
-  //   dispatch("editProfile", profile);
-  // }
+  editAvatar({ dispatch, getters }, avatar) {
+    const profile = { ...getters.getProfile, avatar };
+
+    dispatch("editProfile", profile);
+  },
 };

@@ -5,7 +5,6 @@ export const getInitState = () => {
       firstName: "",
       lastName: "",
       username: "",
-      email: "",
       avatar: null,
     },
   };

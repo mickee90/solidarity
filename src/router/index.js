@@ -55,7 +55,7 @@ const routes = [
     component: Profile,
   },
   {
-    path: "/about-us",
+    path: "/contact-us",
     name: "ContactUs",
     component: ContactUs,
   },

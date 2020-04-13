@@ -9,8 +9,8 @@ instance.defaults.headers.get["Accepts"] = "application/json";
 
 /* instance.interceptors.request.use(
   config => {
-    const idToken = store.getters.idToken;
-    const userId = store.getters.userId;
+    const idToken = store.getters.getIdToken;
+    const userId = store.getters.getUserId;
     
     console.log(idToken);
     console.log(userId);

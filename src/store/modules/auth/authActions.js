@@ -39,6 +39,7 @@ export const actions = {
       lastName: payload.lastName,
       username: payload.username,
       city: payload.city,
+      accountType: payload.accountType,
     };
 
     dispatch("storeUser", newUser);
@@ -51,33 +52,33 @@ export const actions = {
     }, expirationTime * 1000);
   },
 
-  // async changePassword({ state, commit, dispatch }, password) {
-  //   const idToken = state.idToken;
+  async changePassword({ state, commit }, password) {
+    const idToken = state.idToken;
 
-  //   if (!idToken) {
-  //     return;
-  //   }
+    if (!idToken) {
+      return;
+    }
 
-  //   const response = await axiosAuth
-  //     .post(":update?key=" + process.env.VUE_APP_FIREBASE_API_KEY, {
-  //       idToken,
-  //       password,
-  //       returnSecureToken: true,
-  //     })
-  //     .then((res) => res.data)
-  //     .catch((err) => alert(err.message));
+    const response = await axiosAuth
+      .post(":update?key=" + process.env.VUE_APP_FIREBASE_API_KEY, {
+        idToken,
+        password,
+        returnSecureToken: true,
+      })
+      .then((res) => res.data)
+      .catch((err) => alert(err.message));
 
-  //   if (!response) return false;
+    if (!response) return false;
 
-  //   commit("authUser", {
-  //     idToken: response.idToken,
-  //     userId: response.localId,
-  //     expirationDate: generateExpirationDate(response.expiresIn),
-  //     refreshToken: response.refreshToken,
-  //   });
+    commit("authUser", {
+      idToken: response.idToken,
+      userId: response.localId,
+      expirationDate: generateExpirationDate(response.expiresIn),
+      refreshToken: response.refreshToken,
+    });
 
-  //   return response;
-  // },
+    return true;
+  },
 
   async login({ commit, dispatch }, payload) {
     const response = await axiosAuth
@@ -159,6 +160,7 @@ export const actions = {
 
     if (!response) return;
 
+    console.log(payload);
     commit("profile/storeProfile", { ...payload }, { root: true });
     router.replace("/");
   },

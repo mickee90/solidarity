@@ -1,20 +1,20 @@
 export const getters = {
-  user(state) {
+  getUser(state) {
     return state.user;
   },
   isAuthenticated(state) {
     return state.idToken !== null;
   },
-  idToken(state) {
+  getIdToken(state) {
     return state.idToken;
   },
-  userId(state) {
+  getUserId(state) {
     return state.userId;
   },
-  expirationDate(state) {
+  getExpirationDate(state) {
     return state.expirationDate;
   },
-  refreshToken(state) {
+  getRefreshToken(state) {
     return state.refreshToken;
   },
 };
