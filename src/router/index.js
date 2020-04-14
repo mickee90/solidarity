@@ -10,6 +10,7 @@ import Register from "../views/Register.vue";
 import Profile from "../views/Profile.vue";
 import Login from "../views/Login.vue";
 import ContactUs from "../views/ContactUs.vue";
+import EditPost from "../views/EditPost.vue";
 
 Vue.use(VueRouter);
 
@@ -53,6 +54,11 @@ const routes = [
     path: "/profile",
     name: "Profile",
     component: Profile,
+  },
+  {
+    path: "/edit-post/:postId",
+    name: "EditPost",
+    component: EditPost,
   },
   {
     path: "/contact-us",

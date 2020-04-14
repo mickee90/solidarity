@@ -6,9 +6,11 @@ import store from "./store";
 import apolloProvider from "./apolloProvider";
 import VueTailwind from "vue-tailwind";
 import Vuelidate from "vuelidate";
+import CKEditor from "@ckeditor/ckeditor5-vue";
 
 Vue.use(VueTailwind);
 Vue.use(Vuelidate);
+Vue.use(CKEditor);
 
 import "./assets/styles/index.css";
 

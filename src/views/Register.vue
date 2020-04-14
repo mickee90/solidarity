@@ -21,10 +21,9 @@
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
             <!-- class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" -->
-            <p
-              v-if="$v.firstName.$error"
-              class="text-red-500 text-xs italic"
-            >Fältet är obligatoriskt</p>
+            <p v-if="$v.firstName.$error" class="text-red-500 text-xs italic">
+              Fältet är obligatoriskt
+            </p>
           </div>
           <div class="w-full md:w-1/2 px-3">
             <label
@@ -43,7 +42,9 @@
               @blur="$v.lastName.$touch()"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
-            <p v-if="$v.lastName.$error" class="text-red-500 text-xs italic">Fältet är obligatoriskt</p>
+            <p v-if="$v.lastName.$error" class="text-red-500 text-xs italic">
+              Fältet är obligatoriskt
+            </p>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
@@ -64,10 +65,12 @@
               @blur="$v.username.$touch()"
               class="appearance-none block w-full bg-gray-200 text-gray-700 mb-3 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
-            <p v-if="$v.username.$error" class="text-red-500 text-xs italic">Fältet är obligatoriskt</p>
-            <p
-              class="text-gray-600 text-xs italic"
-            >E-posten kommer användas som ditt användarnamn och kontaktuppgift</p>
+            <p v-if="$v.username.$error" class="text-red-500 text-xs italic">
+              Fältet är obligatoriskt
+            </p>
+            <p class="text-gray-600 text-xs italic">
+              E-posten kommer användas som ditt användarnamn och kontaktuppgift
+            </p>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
@@ -88,13 +91,12 @@
               @blur="$v.password.$touch()"
               class="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
             />
-            <p
-              v-if="$v.password.$error"
-              class="text-red-500 text-xs italic"
-            >Lösenordet matchar inte med kraven</p>
-            <p
-              class="text-gray-600 text-xs italic"
-            >Kräver minst {{ $v.password.$params.minVal }} tecken</p>
+            <p v-if="$v.password.$error" class="text-red-500 text-xs italic">
+              Lösenordet matchar inte med kraven
+            </p>
+            <p class="text-gray-600 text-xs italic">
+              Kräver minst {{ $v.password.$params.minVal }} tecken
+            </p>
           </div>
         </div>
         <div class="flex flex-wrap -mx-3 mb-6">
@@ -118,7 +120,9 @@
             <p
               v-if="$v.confirmPassword.$error"
               class="text-red-500 text-xs italic"
-            >Lösenordet matchar inte med kraven</p>
+            >
+              Lösenordet matchar inte med kraven
+            </p>
           </div>
         </div>
         <div class="flex justify-between items-center mb-6">
@@ -134,7 +138,10 @@
               <option value="2">Förening</option>
               <option value="3">Privatperson</option>
             </select>
-            <p v-if="$v.accountType.$error" class="text-red-500 text-xs italic"></p>
+            <p
+              v-if="$v.accountType.$error"
+              class="text-red-500 text-xs italic"
+            ></p>
             <div
               class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
             >
@@ -158,6 +165,8 @@
               @change="$v.city.$touch()"
             >
               <option value>Välj ort</option>
+              <option value="falkenberg">Falkenberg</option>
+              <option value="halmstad">Halmstad</option>
               <option value="varberg">Varberg</option>
             </select>
             <p v-if="$v.city.$error" class="text-red-500 text-xs italic"></p>
@@ -179,7 +188,9 @@
         <div class="flex justify-end items-center">
           <div class>
             <div class="relative">
-              <button class="btn btn-blue" @click="onRegister">Registrera</button>
+              <button class="btn btn-blue" @click="onRegister">
+                Registrera
+              </button>
             </div>
           </div>
         </div>
@@ -200,7 +211,7 @@ export default {
       city: "",
       accountType: 1,
       password: "",
-      confirmPassword: ""
+      confirmPassword: "",
     };
   },
   methods: {
@@ -215,35 +226,35 @@ export default {
         lastName: this.lastName,
         city: this.city,
         accountType: this.accountType,
-        password: this.password
+        password: this.password,
       });
-    }
+    },
   },
   validations: {
     firstName: {
-      required
+      required,
     },
     lastName: {
-      required
+      required,
     },
     city: {
-      required
+      required,
     },
     accountType: {
-      required
+      required,
     },
     username: {
       required,
-      email
+      email,
     },
     password: {
       required,
-      minLen: minLength(6)
+      minLen: minLength(6),
     },
     confirmPassword: {
-      sameAs: sameAs("password")
-    }
-  }
+      sameAs: sameAs("password"),
+    },
+  },
 };
 </script>
 
