@@ -5,8 +5,14 @@
         <a href="/" class="no-underline">Solidariteten</a>
       </div>
       <nav class="nav flex items-center text-xl">
-        <router-link :to="{ name: 'NeedHelp' }" class="menu-item ml-3">Vi behöver hjälp med</router-link>
-        <router-link :to="{ name: 'CanHelp' }" class="menu-item ml-3">Vi kan hjälpa till med</router-link>
+        <router-link
+          :to="{ name: 'NeedHelp', params: { city: $store.getters.getCity } }"
+          class="menu-item ml-3"
+        >Vi behöver hjälp med</router-link>
+        <router-link
+          :to="{ name: 'CanHelp', params: { city: $store.getters.getCity } }"
+          class="menu-item ml-3"
+        >Vi kan hjälpa till med</router-link>
         <button href="#" id="menu-btn" @click="showMenu = !showMenu">
           <span v-if="isAuth">{{ username }}</span>
           <div class="navbar-toggler-icon" :class="{'active': showMenu === true}">

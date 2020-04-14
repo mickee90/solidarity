@@ -20,22 +20,22 @@ const routes = [
     component: Home,
   },
   {
-    path: "/varberg/need-help",
+    path: "/:city/need-help",
     name: "NeedHelp",
     component: NeedHelp,
   },
   {
-    path: "/varberg/need-help-show/1",
+    path: "/:city/need-help-show/1",
     name: "NeedHelpShow",
     component: NeedHelpShow,
   },
   {
-    path: "/varberg/can-help",
+    path: "/:city/can-help",
     name: "CanHelp",
     component: CanHelp,
   },
   {
-    path: "/varberg/can-help-show/1",
+    path: "/:city/can-help-show/1",
     name: "CanHelpShow",
     component: CanHelpShow,
   },

@@ -15,10 +15,14 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     backdoor: false,
+    city: "",
   },
   mutations: {
     setBackdoor(state) {
       state.backdoor = true;
+    },
+    setCity(state, city) {
+      state.city = city;
     },
   },
   actions: {
@@ -27,10 +31,16 @@ export default new Vuex.Store({
       commit("auth/resetState");
       // commit("auth/resetState");
     },
+    setCity({ commit }, city) {
+      commit("setCity", city);
+    },
   },
   getters: {
     getBackdoor(state) {
       return state.backdoor;
+    },
+    getCity(state) {
+      return state.city;
     },
   },
   modules: {
