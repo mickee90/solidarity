@@ -4,6 +4,7 @@ import VuexPersistance from "vuex-persist";
 
 import { authStore } from "./modules/auth/authStore";
 import { profileStore } from "./modules/profiles/profileStore";
+import { postStore } from "./modules/posts/postStore";
 
 const VuexPersist = new VuexPersistance({
   key: "vuex-solidarity",
@@ -46,6 +47,7 @@ export default new Vuex.Store({
   modules: {
     auth: authStore,
     profile: profileStore,
+    post: postStore,
   },
   plugins: [VuexPersist.plugin],
 });

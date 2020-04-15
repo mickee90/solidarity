@@ -15,34 +15,19 @@
           />
           <font-awesome-icon icon="handshake" class="text-6xl" v-else />
         </div>
-        <button class="btn btn-blue mb-4">0000-0000000</button>
-        <button class="btn btn-blue mb-4">xxxxx @ xxxx . se</button>
-        <a href="#" target="_blank" class="mb-4">wwww.wwww.ww</a>
+        <button class="btn btn-blue mb-4">{{ post.phone }}</button>
+        <button class="btn btn-blue mb-4">{{ post.email }}</button>
+        <a href="#" target="_blank" class="mb-4">{{ post.website }}</a>
       </div>
       <div class="p-4 text-left w-3/4">
         <div class="flex justify-between items-center">
-          <h1 class="m-0 pb-8 pt-6">Havanna</h1>
+          <h1 class="m-0 pb-8 pt-6">{{ post.title }}</h1>
           <button class="btn btn-blue h-full" @click="editMode = true">
             Redigera
           </button>
         </div>
-        <div>
-          Kom och köp lunch hos oss! Erbjuder givetsvis take away till
-          rabatterat pris.
-          <br />
-          <br />Vi erbjuder även sittningar för större sällskap i egna rum.
-          <br />
-          <br />Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard dummy text ever
-          since the 1500s, when an unknown printer took a galley of type and
-          scrambled it to make a type specimen book. It has survived not only
-          five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
-          <br />
-        </div>
+        <div v-html="post.ingress" class="mb-4 italic"></div>
+        <div v-html="post.content"></div>
       </div>
     </div>
     <div
@@ -114,38 +99,44 @@
           <label for="ingressInput"
             >Ingress <span class="text-red-500">*</span></label
           >
-          <textarea
+          <ckeditor
             id="ingressInput"
-            type="text"
+            :editor="editor"
             placeholder="Ingress"
-            v-html="post.ingress"
+            v-model="post.ingress"
             :class="{ 'border-red-500': $v.post.ingress.$error }"
             @blur="$v.post.ingress.$touch()"
-            maxlength="100"
+            :config="editorConfig"
             class="w-full appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-24"
-          />
+          ></ckeditor>
           <small
-            >Kort beskrivning som kommer synas vid förhandsvisningen. Max 100
+            >Kort beskrivning som kommer synas vid förhandsvisningen. Max 200
             tecken.</small
           >
+          <p class="text-red-500" v-if="$v.post.ingress.$error">
+            Max 200 tecken
+          </p>
         </div>
         <div class="mb-6 form-group">
           <label for="contentInput"
             >Innehåll <span class="text-red-500">*</span></label
           >
-          <textarea
+          <ckeditor
             id="contentInput"
-            type="text"
+            :editor="editor"
             placeholder="Innehåll"
             v-model="post.content"
-            :class="{ 'border-red-500': $v.post.content.$error }"
             @blur="$v.post.content.$touch()"
-            class="w-full appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48"
-          />
+            :config="editorConfig"
+            class="w-full appearance-none block bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-24"
+          ></ckeditor>
           <small
             >Fritext för vad ni behöver hjälp med, kan bidra med, och/eller
             annan relevant information.</small
           >
+          <p class="text-red-500" v-if="$v.post.content.$error">
+            Innehållet får inte vara tomt.
+          </p>
         </div>
         <div class="mb-6 form-group">
           <label for="phoneInput">Telefonnummer</label>
@@ -198,22 +189,28 @@
 </template>
 
 <script>
-import { required, maxLength } from "vuelidate/lib/validators";
+import { required, maxLength, email } from "vuelidate/lib/validators";
+import ClassicEditor from "@ckeditor/ckeditor5-build-classic";
+
 export default {
   data() {
     return {
       editMode: false,
       profile: {},
       post: {
-        title: "Havanna",
-        ingress:
-          "Kom och köp lunch hos oss! Erbjuder givetsvis take away till rabatterat pris. <br /><br />Vi erbjuder även sittningar för större sällskap i egna rum.",
-        content:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+        title: "",
+        ingress: "",
+        content: "",
         type: 1,
-        email: "xxxxx @ xxxx . se",
-        phone: "0000-0000000",
-        website: "wwww.wwww.ww",
+        email: "",
+        phone: "",
+        website: "",
+      },
+      editor: ClassicEditor,
+      editorConfig: {
+        toolbar: {
+          items: ["bold", "italic"],
+        },
       },
     };
   },
@@ -222,26 +219,27 @@ export default {
       this.$v.post.$touch();
 
       if (this.$v.post.$error) {
-        console.log(this.$v.post.$error);
+        alert("Fyll i alla obligatoriska fält");
         return;
       }
 
-      // const response = await this.$store.dispatch("post/editPost", {
-      //   title: this.post.title,
-      //   ingress: this.post.ingress,
-      //   content: this.post.content,
-      //   type: this.post.type,
-      //   email: this.post.email,
-      //   phone: this.post.phone,
-      //   website: this.post.website,
-      // });
+      const response = await this.$store.dispatch("post/editPost", {
+        title: this.post.title,
+        ingress: this.post.ingress,
+        content: this.post.content,
+        type: this.post.type,
+        email: this.post.email,
+        phone: this.post.phone,
+        website: this.post.website,
+      });
 
-      // if (!response) {
-      //   alert("Något gick fel vid sparandet");
-      //   return;
-      // }
+      if (!response) {
+        alert("Något gick fel vid sparandet");
+        return;
+      }
 
       alert("Sparat!");
+      this.editMode = false;
     },
     onCancel() {
       this.editMode = false;
@@ -254,7 +252,7 @@ export default {
       },
       ingress: {
         required,
-        maxLen: maxLength(100),
+        maxLen: maxLength(200),
       },
       content: {
         required,
@@ -264,12 +262,13 @@ export default {
       },
       email: {
         required,
+        email,
       },
     },
   },
   created() {
     this.profile = this.$store.getters["profile/getProfile"];
-    // this.post = this.$store.getters["post/getPost"];
+    this.post = this.$store.getters["post/getPost"];
   },
 };
 </script>

@@ -100,7 +100,7 @@ export const actions = {
     });
 
     dispatch("setLogoutTimer", response.expiresIn);
-    dispatch("fetchUser", payload);
+    await dispatch("fetchUser", payload);
     router.replace("/");
   },
 
@@ -145,7 +145,8 @@ export const actions = {
     const profile = response.data[Object.keys(response.data)[0]];
 
     if (profile.username) {
-      commit("profile/storeProfile", { ...profile }, { root: true });
+      await commit("profile/storeProfile", { ...profile }, { root: true });
+      await commit("setCity", profile.city, { root: true });
     }
   },
 

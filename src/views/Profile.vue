@@ -292,6 +292,7 @@ export default {
         password: null,
         confirmPassword: null,
       },
+      post: {},
     };
   },
   methods: {
@@ -416,6 +417,7 @@ export default {
   created() {
     this.profile.userId = this.$store.getters["auth/getUserId"];
     this.profile = this.$store.getters["profile/getProfile"];
+    this.post = this.$store.getters["post/getPost"];
     console.log(this.profile);
   },
   components: {
