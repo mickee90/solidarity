@@ -13,11 +13,13 @@ const VuexPersist = new VuexPersistance({
 
 Vue.use(Vuex);
 
+const initState = {
+  backdoor: false,
+  city: "",
+};
+
 export default new Vuex.Store({
-  state: {
-    backdoor: false,
-    city: "",
-  },
+  state: initState,
   mutations: {
     setBackdoor(state) {
       state.backdoor = true;
@@ -25,12 +27,16 @@ export default new Vuex.Store({
     setCity(state, city) {
       state.city = city;
     },
+    resetState(state) {
+      state.city = "";
+    },
   },
   actions: {
     resetAllStates({ commit }) {
-      // Calls resetState for each module who has it declared. (All modules at the moment)
       commit("auth/resetState");
-      // commit("auth/resetState");
+      commit("post/resetState");
+      commit("profile/resetState");
+      commit("resetState");
     },
     setCity({ commit }, city) {
       commit("setCity", city);

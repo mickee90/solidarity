@@ -238,7 +238,6 @@ export default {
         return;
       }
 
-      alert("Sparat!");
       this.editMode = false;
     },
     onCancel() {

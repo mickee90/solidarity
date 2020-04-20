@@ -9,7 +9,7 @@ const generateExpirationDate = (expiresIn) => {
 };
 
 export const actions = {
-  async register({ commit, dispatch }, payload) {
+  async register({ commit, dispatch, rootGetters }, payload) {
     const response = await axiosAuth
       .post(":signUp?key=" + process.env.VUE_APP_FIREBASE_API_KEY, {
         email: payload.username,
@@ -42,8 +42,15 @@ export const actions = {
       accountType: payload.accountType,
     };
 
-    dispatch("storeUser", newUser);
+    await dispatch("storeUser", newUser);
     dispatch("setLogoutTimer", response.expiresIn);
+
+    const initPost = rootGetters["post/getPost"];
+    const postResponse = await dispatch("post/storePost", initPost, {
+      root: true,
+    });
+
+    if (!postResponse) return;
   },
 
   setLogoutTimer({ dispatch }, expirationTime) {
@@ -101,6 +108,7 @@ export const actions = {
 
     dispatch("setLogoutTimer", response.expiresIn);
     await dispatch("fetchUser", payload);
+    await dispatch("post/fetchPost", null, { root: true });
     router.replace("/");
   },
 
