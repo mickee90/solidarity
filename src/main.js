@@ -3,7 +3,6 @@ import App from "./App.vue";
 import "./registerServiceWorker";
 import router from "./router";
 import store from "./store";
-import apolloProvider from "./apolloProvider";
 import VueTailwind from "vue-tailwind";
 import Vuelidate from "vuelidate";
 import CKEditor from "@ckeditor/ckeditor5-vue";
@@ -30,6 +29,5 @@ Vue.config.productionTip = false;
 new Vue({
   router,
   store,
-  apolloProvider,
   render: (h) => h(App),
 }).$mount("#app");

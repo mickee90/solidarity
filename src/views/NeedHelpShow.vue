@@ -2,6 +2,15 @@
   <div>
     <div class="bg-white content max-w-screen-xl mx-auto pb-8 pr-8">
       <div
+        class="min-h-v-1/4 items-center flex justify-around text-2xl"
+        v-if="state === 'loading'"
+      >Laddar..</div>
+      <div
+        class="min-h-v-1/4 items-center flex justify-around text-2xl"
+        v-else-if="state === 'empty'"
+      >Ingen information kunde hittas</div>
+      <div
+        v-else
         class="border-top bg-white border-gray-400 flex lg:max-w-full max-w-sm rounded-lg overflow-hidden w-full"
       >
         <div class="flex flex-col items-center justify-center w-1/4">
@@ -9,29 +18,14 @@
             icon="handshake"
             class="fa-handshake fa-w-20 my-10 svg-inline--fa text-6xl"
           />
-          <button class="btn btn-blue mb-4">0000-0000000</button>
-          <button class="btn btn-blue mb-4">xxxxx @ xxxx . se</button>
-          <a href="#" target="_blank" class=" mb-4">wwww.wwww.ww</a>
+          <button class="btn btn-blue mb-4" v-if="post.phone !== ''" v-text="post.phone"></button>
+          <button class="btn btn-blue mb-4" v-if="post.email !== ''" v-text="post.email"></button>
+          <a href="#" target="_blank" class="mb-4" v-if="post.website !== ''" v-text="post.website"></a>
         </div>
         <div class="p-4 text-left w-3/4">
-          <h1 class="m-0 pb-8 pt-6">Havanna</h1>
-          <div>
-            Kom och köp lunch hos oss! Erbjuder givetsvis take away till
-            rabatterat pris.<br /><br />
-            Vi erbjuder även sittningar för större sällskap i egna rum.
-            <br />
-            <br />
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s, when an unknown printer took a galley of type
-            and scrambled it to make a type specimen book. It has survived not
-            only five centuries, but also the leap into electronic typesetting,
-            remaining essentially unchanged. It was popularised in the 1960s
-            with the release of Letraset sheets containing Lorem Ipsum passages,
-            and more recently with desktop publishing software like Aldus
-            PageMaker including versions of Lorem Ipsum.
-            <br />
-          </div>
+          <h1 class="m-0 pb-8 pt-6" v-text="post.title"></h1>
+          <div v-html="post.ingress" class="italic mb-5"></div>
+          <div v-html="post.content"></div>
         </div>
       </div>
     </div>
@@ -40,6 +34,25 @@
 
 <script>
 export default {
-  components: {},
+  data() {
+    return {
+      post: {},
+      state: "loading"
+    };
+  },
+  async created() {
+    const post = await this.$store.dispatch(
+      "post/fetchSinglePost",
+      this.$router.history.current.params.postId
+    );
+
+    if (!post) {
+      this.state = "empty";
+      return;
+    }
+
+    this.post = post;
+    this.state = "";
+  }
 };
 </script>

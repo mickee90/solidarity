@@ -34,16 +34,35 @@ export default {
     url: {
       required: false,
       type: Object,
-      default: null
-    }
+      default: null,
+    },
+  },
+  data() {
+    return {
+      post: {},
+    };
   },
   methods: {
     onGoTo() {
       if (this.url === null) return;
 
       this.$router.push(this.url);
-    }
-  }
+    },
+  },
+  async created() {
+    console.log(this.url);
+
+    const post = await this.$store.dispatch(
+      "post/fetchSinglePost",
+      this.url.params.postId
+    );
+
+    if (!post) return;
+
+    this.post = post;
+
+    console.log(this.post);
+  },
 };
 </script>
 

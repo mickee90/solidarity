@@ -26,7 +26,7 @@ const routes = [
     component: NeedHelp,
   },
   {
-    path: "/:city/need-help-show/1",
+    path: "/:city/need-help-show/:postId",
     name: "NeedHelpShow",
     component: NeedHelpShow,
   },
@@ -36,7 +36,7 @@ const routes = [
     component: CanHelp,
   },
   {
-    path: "/:city/can-help-show/1",
+    path: "/:city/can-help-show/:postId",
     name: "CanHelpShow",
     component: CanHelpShow,
   },

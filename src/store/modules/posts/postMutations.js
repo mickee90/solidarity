@@ -9,6 +9,9 @@ export const getInitState = () => {
       phone: "",
       website: "",
       userId: null,
+      published: false,
+      queryProp: "",
+      postId: null,
     },
   };
 };

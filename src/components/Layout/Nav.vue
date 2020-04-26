@@ -72,7 +72,9 @@ export default {
   },
   mounted() {
     document.querySelectorAll(".menu-item").forEach(menuItem => {
-      menuItem.addEventListener("click", () => (this.showMenu = false));
+      menuItem.addEventListener("click", () => {
+        this.showMenu = false;
+      });
     });
   }
 };

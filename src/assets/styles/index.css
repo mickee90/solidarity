@@ -28,5 +28,18 @@ a {
   @apply bg-gray-700 text-white;
 }
 
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+a.router-link-exact-active {
+  @apply text-blue-500 !important;
+}
+
 @tailwind components;
 @tailwind utilities;

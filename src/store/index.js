@@ -15,7 +15,7 @@ Vue.use(Vuex);
 
 const initState = {
   backdoor: false,
-  city: "",
+  city: "varberg",
 };
 
 export default new Vuex.Store({
@@ -36,7 +36,6 @@ export default new Vuex.Store({
       commit("auth/resetState");
       commit("post/resetState");
       commit("profile/resetState");
-      commit("resetState");
     },
     setCity({ commit }, city) {
       commit("setCity", city);

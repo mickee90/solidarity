@@ -4,7 +4,7 @@
       <div class="flex items-center lg:text-left lg:w-1/2 md:px-8 px-8 text-center">
         <div>
           <h2 class="text-3xl font-semibold text-gray-800 md:text-4xl">Tillsammans gör vi skillnad!</h2>
-          <p class="mt-2 text-sm text-gray-500 md:text-base">
+          <p class="mt-2 text-sm text-gray-700 md:text-base">
             Många företagare och personer i riskgrupper behöver hjälp på ett eller annat sätt nu under dessa
             tider, och vi är säkra på att det är många som kan och vill hjälpa till på något sätt,
             stort som smått.

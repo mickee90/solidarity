@@ -32,6 +32,7 @@ instance.defaults.headers.get["Accepts"] = "application/json";
 instance.interceptors.response.use(
   (response) => response,
   (error) => {
+    console.log(error.response);
     if (error.response.status === 500 || error.response.status === 400) {
       alert("Något gick fel. Vänligen prova igen");
     }

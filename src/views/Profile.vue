@@ -6,10 +6,7 @@
           <div class="pb-10 mb-10 border-b border-gray-300">
             <div class="mb-10">
               <label for="avatarFileInput" class="w-100">
-                <div
-                  class="m-auto flex justify-center"
-                  style="max-width: 200px;"
-                >
+                <div class="m-auto flex justify-center" style="max-width: 200px;">
                   <img
                     id="avatar"
                     :src="profile.avatar.secure_url"
@@ -21,7 +18,7 @@
                   />
                   <font-awesome-icon icon="handshake" class="text-6xl" v-else />
                 </div>
-                <div class="avatar-link cursor-pointer text-center">
+                <div class="text-blue-500 cursor-pointer text-center hover:underline">
                   <input
                     class="hidden"
                     type="file"
@@ -42,9 +39,7 @@
                     :disabled="
                       chosenAvatar === '' || chosenAvatar === undefined
                     "
-                  >
-                    Ladda upp
-                  </button>
+                  >Ladda upp</button>
                 </span>
               </div>
             </div>
@@ -62,9 +57,7 @@
               <p
                 v-if="$v.profile.firstName.$error"
                 class="text-red-500 text-xs italic"
-              >
-                Fältet är obligatoriskt
-              </p>
+              >Fältet är obligatoriskt</p>
             </div>
             <div class="mb-6">
               <input
@@ -79,9 +72,7 @@
               <p
                 v-if="$v.profile.lastName.$error"
                 class="text-red-500 text-xs italic"
-              >
-                Fältet är obligatoriskt
-              </p>
+              >Fältet är obligatoriskt</p>
             </div>
             <div class="mb-6">
               <input
@@ -96,9 +87,7 @@
               <p
                 v-if="$v.profile.username.$error"
                 class="text-red-500 text-xs italic"
-              >
-                Fältet är obligatoriskt
-              </p>
+              >Fältet är obligatoriskt</p>
             </div>
             <div class="flex justify-between items-center mb-6">
               <div class="relative">
@@ -114,10 +103,7 @@
                   <option value="halmstad">Halmstad</option>
                   <option value="varberg">Varberg</option>
                 </select>
-                <p
-                  v-if="$v.profile.city.$error"
-                  class="text-red-500 text-xs italic"
-                ></p>
+                <p v-if="$v.profile.city.$error" class="text-red-500 text-xs italic"></p>
                 <div
                   class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
                 >
@@ -146,10 +132,7 @@
                   <option value="2">Förening</option>
                   <option value="3">Privatperson</option>
                 </select>
-                <p
-                  v-if="$v.profile.accountType.$error"
-                  class="text-red-500 text-xs italic"
-                ></p>
+                <p v-if="$v.profile.accountType.$error" class="text-red-500 text-xs italic"></p>
                 <div
                   class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700"
                 >
@@ -166,9 +149,7 @@
               </div>
             </div>
             <div class="flex justify-end">
-              <button class="btn btn-blue" @click="onUpdateProfile">
-                Uppdatera profil
-              </button>
+              <button class="btn btn-blue" @click="onUpdateProfile">Uppdatera profil</button>
             </div>
           </div>
 
@@ -194,9 +175,7 @@
                 <p
                   v-if="$v.passwordForm.password.$error"
                   class="text-red-500 text-xs italic"
-                >
-                  Lösenordet matchar inte med kraven
-                </p>
+                >Lösenordet matchar inte med kraven</p>
                 <p class="text-gray-600 text-xs italic">
                   Kräver minst
                   {{ $v.passwordForm.password.$params.minLen.min }} tecken
@@ -226,21 +205,23 @@
                 <p
                   v-if="$v.passwordForm.confirmPassword.$error"
                   class="text-red-500 text-xs italic"
-                >
-                  Lösenordet matchar inte med kraven
-                </p>
+                >Lösenordet matchar inte med kraven</p>
               </div>
             </div>
             <div class="flex justify-end">
-              <button class="btn btn-blue" @click="onUpdatePassword">
-                Uppdatera lösenord
-              </button>
+              <button class="btn btn-blue" @click="onUpdatePassword">Uppdatera lösenord</button>
             </div>
           </div>
         </div>
         <div class="w-2/3 pl-8">
-          <div class="grid gap-4">
-            <Card :url="{ name: 'EditPost', params: { postId: 1 } }">
+          <div v-if="!post.published">
+            <router-link
+              :to="{ name: 'EditPost', params: { postId: post.postId } }"
+              class="btn btn-blue"
+            >Skapa inlägg</router-link>
+          </div>
+          <div class="grid gap-4" v-else>
+            <Card :url="{ name: 'EditPost', params: { postId: post.postId } }">
               <template slot="logo">
                 <img
                   id="avatar"
@@ -253,15 +234,12 @@
               </template>
               <template slot="header">
                 <div class="flex justify-between">
-                  <div>Havanna</div>
-                  <button class="appearance-none text-base avatar-link">
-                    Redigera
-                  </button>
+                  <div v-text="post.title"></div>
+                  <button class="appearance-none text-base text-blue-500 hover:underline">Redigera</button>
                 </div>
               </template>
               <template slot="ingress">
-                Kom och köp lunch hos oss! Erbjuder givetsvis take away till
-                rabatterat pris.
+                <div v-html="post.ingress"></div>
               </template>
             </Card>
           </div>
@@ -285,14 +263,14 @@ export default {
         username: "",
         city: "",
         accountType: 1,
-        avatar: null,
+        avatar: null
       },
       chosenAvatar: "",
       passwordForm: {
         password: null,
-        confirmPassword: null,
+        confirmPassword: null
       },
-      post: {},
+      post: {}
     };
   },
   methods: {
@@ -309,7 +287,7 @@ export default {
         firstName: this.profile.firstName,
         lastName: this.profile.lastName,
         city: this.profile.city,
-        accountType: this.profile.accountType,
+        accountType: this.profile.accountType
       });
 
       if (!response) {
@@ -377,52 +355,53 @@ export default {
 
       const response = await axios
         .post(url, formData)
-        .then((res) => res.data)
-        .catch((err) => console.log(err));
+        .then(res => res.data)
+        .catch(err => console.log(err));
 
       this.$store.dispatch("profile/editAvatar", response);
       this.chosenAvatar = "";
       this.profile.avatar = { ...response };
-    },
+    }
   },
   validations: {
     profile: {
       firstName: {
-        required,
+        required
       },
       lastName: {
-        required,
+        required
       },
       city: {
-        required,
+        required
       },
       accountType: {
-        required,
+        required
       },
       username: {
         required,
-        email,
-      },
+        email
+      }
     },
     passwordForm: {
       password: {
         required,
-        minLen: minLength(6),
+        minLen: minLength(6)
       },
       confirmPassword: {
-        sameAs: sameAs("password"),
-      },
-    },
+        sameAs: sameAs("password")
+      }
+    }
   },
   created() {
     this.profile.userId = this.$store.getters["auth/getUserId"];
     this.profile = this.$store.getters["profile/getProfile"];
     this.post = this.$store.getters["post/getPost"];
     console.log(this.profile);
+    console.log(this.post);
   },
   components: {
-    Card,
-  },
+    Card
+  }
 };
 </script>
 
@@ -476,14 +455,6 @@ span.required {
   text-align: center;
   color: #fff;
 }
-.avatar-link {
-  color: #3490dc;
-}
-
-.avatar-link:hover {
-  text-decoration: underline;
-}
-
 .profile-information {
   padding-top: 60px;
 }

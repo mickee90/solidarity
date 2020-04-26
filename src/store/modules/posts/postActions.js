@@ -1,7 +1,7 @@
 import axios from "../../../axios/axios";
 
 export const actions = {
-  async storePost({ rootGetters }, data) {
+  async storePost({ rootGetters, commit }, data) {
     const idToken = rootGetters["auth/getIdToken"];
     const userId = rootGetters["auth/getUserId"];
     const profile = rootGetters["profile/getProfile"];
@@ -21,7 +21,8 @@ export const actions = {
 
     // console.log(response);
 
-    // post = { ...post, postId: response.name };
+    post = { ...post, postId: response.name };
+    commit("storePost", post);
 
     // const update = await dispatch("editPost", post);
 
@@ -92,28 +93,55 @@ export const actions = {
 
     const post = response[Object.keys(response)[0]];
 
-    await commit("storePost", { ...post });
+    await commit("storePost", { ...post, postId: Object.keys(response)[0] });
 
     return true;
   },
 
-  async fetchPosts({ rootGetters }, city) {
-    const idToken = rootGetters["auth/getIdToken"];
-    const userId = rootGetters["auth/getUserId"];
-
-    if (!idToken || !userId) {
-      alert("Någonting gick fel. Var vänlig prova igen.");
-      return;
-    }
-
+  async fetchSinglePost({}, postId) {
     const response = await axios
-      .get(`/posts.json?auth=${idToken}&orderBy="city"&equalTo="${city}"`)
+      .get(`/posts/${postId}.json`)
       .then((res) => res.data);
 
     if (!response) return;
 
-    if (Object.keys(response).length > 0) return;
+    if (Object.keys(response) === undefined) return;
+
+    const post = {
+      ...response,
+      postId,
+    };
+
+    return post;
+  },
+
+  async fetchPosts({}, payload) {
+    const response = await axios
+      .get(
+        `/posts.json?orderBy="queryProp"&equalTo="${payload.city}-${payload.type}"`
+      )
+      .then((res) => res.data);
+
+    if (!response) return;
+
+    if (Object.keys(response).length === 0) return;
 
     return response;
+  },
+
+  async fetchCanHelpPosts({ rootGetters, dispatch }) {
+    const city = rootGetters["getCity"];
+
+    const posts = await dispatch("fetchPosts", { city, type: "canHelp" });
+
+    return posts;
+  },
+
+  async fetchNeedHelpPosts({ rootGetters, dispatch }) {
+    const city = rootGetters["getCity"];
+
+    const posts = await dispatch("fetchPosts", { city, type: "needHelp" });
+
+    return posts;
   },
 };

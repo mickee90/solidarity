@@ -11,8 +11,8 @@
             <label
               for="grid-first-name"
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              >Förnamn</label
-            ><input
+            >Förnamn</label>
+            <input
               id="grid-first-name"
               type="text"
               placeholder="Förnamn"
@@ -21,14 +21,14 @@
             <!-- class="appearance-none block w-full bg-gray-200 text-gray-700 border border-red-500 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" -->
             <!-- <p class="text-red-500 text-xs italic">
               Fältet är obligatoriskt
-            </p> -->
+            </p>-->
           </div>
           <div class="w-full md:w-1/2 px-3">
             <label
               for="grid-last-name"
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              >Efternamn</label
-            ><input
+            >Efternamn</label>
+            <input
               id="grid-last-name"
               type="text"
               placeholder="Efternamn"
@@ -41,8 +41,8 @@
             <label
               for="grid-username"
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-              >E-post</label
-            ><input
+            >E-post</label>
+            <input
               id="grid-username"
               type="email"
               placeholder="E-post"
@@ -55,19 +55,15 @@
             <label
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               for="grid-password"
-            >
-              Meddelande
-            </label>
+            >Meddelande</label>
             <textarea
-              class=" no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
+              class="no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
               id="message"
             ></textarea>
           </div>
         </div>
         <div class="flex flex-wrap justify-end">
-          <button class="btn btn-blue" @click="onSendForm">
-            Registrera
-          </button>
+          <button class="btn btn-blue" @click="onSendForm">Skicka</button>
         </div>
       </div>
     </div>
@@ -79,7 +75,7 @@ export default {
   methods: {
     onSendForm() {
       console.log("yo");
-    },
-  },
+    }
+  }
 };
 </script>

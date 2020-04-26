@@ -109,7 +109,7 @@ export const actions = {
     dispatch("setLogoutTimer", response.expiresIn);
     await dispatch("fetchUser", payload);
     await dispatch("post/fetchPost", null, { root: true });
-    router.replace("/");
+    router.replace("/profile");
   },
 
   // tryAutoLogin({ commit, state }) {
