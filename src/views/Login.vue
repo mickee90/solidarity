@@ -1,12 +1,16 @@
 <template>
-  <div>
+  <div class="lg:max-w-v-1/2 max-w-v-9/10 xl:max-w-v-1/4 mx-auto">
     <div class="content">
-      <form class="bg-white m-auto max-w-lg p-16 rounded-md w-full" @submit.prevent="onLogin">
+      <form
+        class="bg-white m-auto max-w-lg p-16 rounded-md w-full"
+        @submit.prevent="onLogin"
+      >
         <div class="w-full">
           <label
             for="grid-username"
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-left"
-          >Användarnamn (E-post)</label>
+            >Användarnamn (E-post)</label
+          >
           <input
             id="grid-username"
             type="email"
@@ -21,7 +25,8 @@
           <label
             for="grid-password"
             class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-left"
-          >Lösenord</label>
+            >Lösenord</label
+          >
           <input
             id="grid-password"
             type="password"
@@ -48,7 +53,7 @@ export default {
   data() {
     return {
       username: "",
-      password: ""
+      password: "",
     };
   },
   methods: {
@@ -59,18 +64,18 @@ export default {
 
       this.$store.dispatch("auth/login", {
         username: this.username,
-        password: this.password
+        password: this.password,
       });
-    }
+    },
   },
   validations: {
     username: {
-      required
+      required,
     },
     password: {
-      required
-    }
-  }
+      required,
+    },
+  },
 };
 </script>
 

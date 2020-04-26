@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="xxl:max-w-v-3/4 lg:max-w-v-9/10 mx-auto">
     <div class="bg-white content max-w-screen-xl mx-auto pb-8 pr-8">
       <div
         class="min-h-v-1/4 items-center flex justify-around text-2xl"

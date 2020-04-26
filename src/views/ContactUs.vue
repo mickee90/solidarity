@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="lg:max-w-v-1/2 max-w-v-9/10 mx-auto">
     <div class="content">
       <div class="bg-white m-auto max-w-lg px-16 pb-16 pt-8 rounded-md w-full">
         <div class="pb-8">
@@ -11,7 +11,8 @@
             <label
               for="grid-first-name"
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            >Förnamn</label>
+              >Förnamn</label
+            >
             <input
               id="grid-first-name"
               type="text"
@@ -27,7 +28,8 @@
             <label
               for="grid-last-name"
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            >Efternamn</label>
+              >Efternamn</label
+            >
             <input
               id="grid-last-name"
               type="text"
@@ -41,7 +43,8 @@
             <label
               for="grid-username"
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-            >E-post</label>
+              >E-post</label
+            >
             <input
               id="grid-username"
               type="email"
@@ -55,7 +58,8 @@
             <label
               class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
               for="grid-password"
-            >Meddelande</label>
+              >Meddelande</label
+            >
             <textarea
               class="no-resize appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500 h-48 resize-none"
               id="message"
@@ -75,7 +79,7 @@ export default {
   methods: {
     onSendForm() {
       console.log("yo");
-    }
-  }
+    },
+  },
 };
 </script>

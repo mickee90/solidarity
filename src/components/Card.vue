@@ -5,7 +5,7 @@
     :class="{ 'cursor-pointer': url !== null }"
   >
     <div
-      class="p-4 flex flex-none h-48 items-center justify-center lg:h-auto lg:rounded-l lg:rounded-t-none lg:w-48 overflow-hidden rounded-t text-center"
+      class="p-4 flex flex-none h-48 items-center justify-center lg:h-auto lg:rounded-l lg:rounded-t-none lg:w-32 overflow-hidden rounded-t text-center"
     >
       <slot name="logo">
         <font-awesome-icon icon="handshake" class="text-6xl" />
